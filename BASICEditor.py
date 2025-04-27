@@ -1,5 +1,5 @@
 # BASIC Editor for LASER-310 by odorajbotoj
-# version 1.0.2
+# version 1.0.3
 
 import copy
 import json
@@ -312,7 +312,7 @@ def insertSTR():
         if len("{} {} \"{}\"".format(basicObj["lineNum"] + lineInterval.get(), "".join(currentLineObj["blocks"]), txt)) > 60:
             tkinter.messagebox.showerror("超长", "行字符数 > 60")
             return
-        currentLineObj["blocks"] += [" ", "\"" + txt + "\""]
+        currentLineObj["blocks"].append("\"" + txt + "\"")
         updateText()
         mainEntry.set("")
 
@@ -402,8 +402,10 @@ editFrame.grid(row=1, column=0)
 
 def openFile():
     global basicObj, fileVer
-    filename = tkinter.filedialog.askopenfilename(title="打开", initialfile="basic_code.json")
-    if filename == "":
+    filename = tkinter.filedialog.askopenfilename(title="打开", initialfile="basic_code.json", filetypes=[("JSON", ".json")])
+    # DEBUG
+    #print(filename)
+    if len(filename) == 0:
         return
     backup = {}
     with open(filename, "r", encoding="utf-8") as f:
@@ -415,7 +417,7 @@ def openFile():
     updateText()
 
 def saveFile():
-    filename = tkinter.filedialog.asksaveasfilename(title="保存", initialfile="basic_code.json")
+    filename = tkinter.filedialog.asksaveasfilename(title="保存", initialfile="basic_code.json", defaultextension=".json", filetypes=[("JSON", ".json")])
     if filename == "":
         return
     with open(filename, "w", encoding="utf-8") as f:
@@ -433,7 +435,7 @@ def checkName(name):
 def exportWAV():
     global basicObj
     basicName = tkinter.simpledialog.askstring("输入程序名", "请输入程序名\n15个以内合法字符")
-    if basicName == "":
+    if basicName == None:
         return
     if not checkName(basicName):
         tkinter.messagebox.showerror("错误", "不合法的程序名")
@@ -456,7 +458,7 @@ def exportWAV():
     bytesArrA.append(0x00)
     # 问开始地址
     startAddr = tkinter.simpledialog.askinteger(title="输入起始地址", prompt="请输入程序起始地址\n默认 0x7AE9", initialvalue=0x7AE9, minvalue=0x7AE9, maxvalue=0xFFFF)
-    if startAddr == 0:
+    if startAddr == None:
         return
     # 准备校验
     checksum = 0
@@ -524,7 +526,7 @@ def exportWAV():
     #print(len(addrArr), addrArr)
     #print(checksum, checksumHex)
     # 生成wav
-    filename = tkinter.filedialog.asksaveasfilename(title="保存", initialfile="basic_code.wav")
+    filename = tkinter.filedialog.asksaveasfilename(title="保存", initialfile="basic_code.wav", defaultextension=".wav", filetypes=[("WAV", ".wav")])
     if filename == "":
         return
     with wave.open(filename, "w") as wavf:

@@ -1,5 +1,5 @@
 # BASIC Editor for LASER-310 by odorajbotoj
-# version 1.0.1
+# version 1.0.2
 
 import copy
 import json
@@ -292,7 +292,7 @@ def insertREM():
         if len("{} REM \"{}\"".format(basicObj["lineNum"], txt)) > 60:
             tkinter.messagebox.showerror("超长", "行字符数 > 60")
             return
-        basicObj["lines"].append({"lineNum": basicObj["lineNum"], "blocks": ["REM", " ", "\"" + txt + "\""]})
+        basicObj["lines"].append({"lineNum": basicObj["lineNum"], "blocks": ["REM", " ", txt]})
         updateText()
         mainEntry.set("")
 

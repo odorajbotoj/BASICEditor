@@ -1,5 +1,5 @@
 # BASIC Editor for LASER-310 by odorajbotoj
-# version 1.0.4
+# version 1.0.5
 
 import copy
 import json
@@ -425,6 +425,8 @@ def saveFile():
 
 def checkName(name):
     if len(name) > 15:
+        return False
+    elif name[0] not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
         return False
     else:
         for i in name:

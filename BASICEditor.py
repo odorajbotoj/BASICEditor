@@ -1,5 +1,5 @@
 # BASIC Editor for LASER-310 by odorajbotoj
-# version 1.0.0
+# version 1.0.1
 
 import copy
 import json
@@ -468,17 +468,27 @@ def exportWAV():
         # 生成头
         bs = [0x00, 0x00, int(packedLineNum[:2], 16), int(packedLineNum[2:4], 16)]
         # 填充程序
-        for block in line["blocks"]:
-            get1 = allBasicDict.get(block)
-            if get1 != None:
-                bs.append(get1)
-            else:
+        if line["blocks"][0] == "REM":
+            bs.append(allBasicDict.get("REM"))
+            for block in line["blocks"][1:]:
                 for i in block:
                     get2 = blockChrTransTable.get(i)
                     if get2 != None:
                         bs.append(get2)
                     else:
                         bs.append(ord(i))
+        else:
+            for block in line["blocks"]:
+                get1 = allBasicDict.get(block)
+                if get1 != None:
+                    bs.append(get1)
+                else:
+                    for i in block:
+                        get2 = blockChrTransTable.get(i)
+                        if get2 != None:
+                            bs.append(get2)
+                        else:
+                            bs.append(ord(i))
         # 添加尾
         bs.append(0x00)
         # 计算地址偏移

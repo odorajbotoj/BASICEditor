@@ -1,5 +1,5 @@
 # BASIC Editor for LASER-310 by odorajbotoj
-# version 1.0.3
+# version 1.0.4
 
 import copy
 import json
@@ -471,7 +471,7 @@ def exportWAV():
         bs = [0x00, 0x00, int(packedLineNum[:2], 16), int(packedLineNum[2:4], 16)]
         # 填充程序
         if line["blocks"][0] == "REM":
-            bs.append(allBasicDict.get("REM"))
+            bs.append(0x93)
             for block in line["blocks"][1:]:
                 for i in block:
                     get2 = blockChrTransTable.get(i)

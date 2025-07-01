@@ -25,8 +25,8 @@ specialChars = {
     "{alu}": 0x88,
     "{ldru}": 0x89,
     "{lurd}": 0x86,
-    "{b}": 0x8F,
-    "{w}": 0x80,
+    "{aa}": 0x8F,
+    "{a}": 0x80,
     "{arr}": 0xD1,
 }
 systemBasicDict = {

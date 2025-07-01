@@ -1,7 +1,7 @@
 # converter
 # from txt to wav
 # for laser310 color computer
-# version 1
+# version 2
 # by odorajbotoj
 
 import sys
@@ -11,22 +11,22 @@ import wave
 allowInput = list(" QWERTYUIOPASDFGHJKLZXCVBNM1234567890!\"#$%&'()@-=[]/?;+:*\\,<.>")
 
 specialChars = {
-    "{rd}": 0x8E,
-    "{ld}": 0x8D,
-    "{ru}": 0x8B,
-    "{lu}": 0x87,
-    "{d}": 0x8C,
-    "{u}": 0x83,
-    "{r}": 0x8A,
-    "{l}": 0x85,
-    "{ard}": 0x81,
-    "{ald}": 0x82,
-    "{aru}": 0x84,
-    "{alu}": 0x88,
-    "{ldru}": 0x89,
-    "{lurd}": 0x86,
-    "{aa}": 0x8F,
-    "{a}": 0x80,
+    "{ard}": 0x8E,
+    "{ald}": 0x8D,
+    "{aru}": 0x8B,
+    "{alu}": 0x87,
+    "{u}": 0x8C,
+    "{d}": 0x83,
+    "{l}": 0x8A,
+    "{r}": 0x85,
+    "{rd}": 0x81,
+    "{ld}": 0x82,
+    "{ru}": 0x84,
+    "{lu}": 0x88,
+    "{lurd}": 0x89,
+    "{ldru}": 0x86,
+    "{a}": 0x8F,
+    "{aa}": 0x80,
     "{arr}": 0xD1,
 }
 systemBasicDict = {
